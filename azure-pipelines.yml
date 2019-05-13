@@ -10,10 +10,21 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: DownloadSecureFile@1
+  name: settings_xml
+  inputs:
+    secureFile: settings.xml
+
+- task: DownloadSecureFile@1
+  name: license
+  inputs:
+    secureFile: license
+
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
+    mavenPomFile: '$(project_name)/poms/pom.xml'
+    mavenOptions: '-Dlicense.path=$(license.secureFilePath)-Xms1024m -Xmx3096m'
+    options: '--settings $(settings_xml.secureFilePath) -X -U -DaltDeploymentRepository=releases::default::http://localhost:8081/repository/releases/'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
