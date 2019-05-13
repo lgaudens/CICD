@@ -17,7 +17,6 @@
     <module>jobs/process/job_feature956_0.1</module>
     <module>jobs/process/jobparent_feature950_0.1</module>
     <module>jobs/process/job_feature666_0.1</module>
-    <module>jobs/process/job_feature903_0.1</module>
   </modules>
   <properties>
     <signer.version>7.2.1-M5</signer.version>
