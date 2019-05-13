@@ -9,6 +9,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  project_name: TALEND
+  nexus_url: http://40.68.59.3:8081
+
 steps:
 - task: DownloadSecureFile@1
   name: settings_xml
@@ -22,12 +26,10 @@ steps:
 
 - task: Maven@3
   inputs:
-    mavenPomFile: '$(project_name)/poms/pom.xml'
-    mavenOptions: '-Dlicense.path=$(license.secureFilePath)-Xms1024m -Xmx3096m'
-    options: '--settings $(settings_xml.secureFilePath) -X -U -DaltDeploymentRepository=releases::default::http://localhost:8081/repository/releases/'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+      mavenPomFile: '$(project_name)/poms/pom.xml' 
+      mavenOptions: '-Dlicense.path=$(license.secureFilePath) -Dupdatesite.path=http://52.178.88.83/toto -Xmx3096m -Xmx1024m' # Optional
+      options: '--settings $(settings_xml.secureFilePath) -X'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      publishJUnitResults: false
+      goals: 'clean package'
