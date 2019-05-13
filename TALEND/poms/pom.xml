@@ -13,7 +13,6 @@
     <module>jobs/process/demo/onboardingdemojob_0.1</module>
     <module>jobs/process/jobsubchild_feature950_0.1</module>
     <module>jobs/process/job_feature678_0.1</module>
-    <module>jobs/process/job_feature903_0.1</module>
     <module>jobs/process/jobchild_feature950_0.1</module>
     <module>jobs/process/job_feature956_0.1</module>
     <module>jobs/process/jobparent_feature950_0.1</module>
