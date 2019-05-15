@@ -14,7 +14,7 @@ variables:
 - name: project_name
   value: 'TALEND'
 - name: job_name
-  value: 'helloworld'
+  value: 'job_feature666'
 - name: job_version
   value: '0.1'
 - name: docker_image_name
@@ -45,5 +45,5 @@ steps:
           -Ddocker.push.username=$(docker_username)
           -Ddocker.push.password=$(docker_password)
           -Xmx3096m -Xmx1024m
-        options: '--settings $(settings_xml.secureFilePath) -X -Pdocker -am'
+        options: '--settings $(settings_xml.secureFilePath) -X -Pdocker -pl jobs/process/$(job_name)_$(job_version) -am -Dtalend.docker.name=$(docker_image_name)'
         goals: 'deploy'
