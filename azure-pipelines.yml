@@ -45,5 +45,5 @@ steps:
           -Ddocker.push.username=$(docker_username)
           -Ddocker.push.password=$(docker_password)
           -Xmx3096m -Xmx1024m
-        options: '--settings $(settings_xml.secureFilePath) -X -Pdocker -pl jobs/process/$(job_name)_$(job_version) -am -Dtalend.docker.name=$(docker_image_name)'
+        options: '--settings $(settings_xml.secureFilePath) -X -Pdocker'
         goals: 'deploy'
