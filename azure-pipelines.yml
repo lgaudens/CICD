@@ -10,9 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: Talend Configuration
+- group: CICD variable group
 - name: project_name
-  value: 'HELLWEEK'
+  value: 'TALEND'
 - name: job_name
   value: 'helloworld'
 - name: job_version
