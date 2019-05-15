@@ -10,26 +10,40 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  project_name: TALEND
-  nexus_url: http://40.68.59.3:8081
+- group: Talend Configuration
+- name: project_name
+  value: 'HELLWEEK'
+- name: job_name
+  value: 'helloworld'
+- name: job_version
+  value: '0.1'
+- name: docker_image_name
+  value: 'CICD'
 
 steps:
-- task: DownloadSecureFile@1
-  name: settings_xml
-  inputs:
-    secureFile: settings.xml
+  - task: DownloadSecureFile@1
+    name: settings_xml
+    inputs:
+      secureFile: settings.xml
 
-- task: DownloadSecureFile@1
-  name: license
-  inputs:
-    secureFile: license
+  - task: DownloadSecureFile@1
+    name: license
+    inputs:
+      secureFile: license
 
-- task: Maven@3
-  inputs:
-      mavenPomFile: '$(project_name)/poms/pom.xml' 
-      mavenOptions: '-Dlicense.path=$(license.secureFilePath) -Dupdatesite.path=http://52.178.88.83/toto -Xmx3096m -Xmx1024m' # Optional
-      options: '--settings $(settings_xml.secureFilePath) -X'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.8'
-      publishJUnitResults: false
-      goals: 'clean package'
+  - task: CmdLine@2
+    inputs:
+      script: 'docker pull openjdk:8-jre-slim'
+
+  - task: Maven@3
+    inputs:
+        mavenPomFile: '$(project_name)/poms/pom.xml' 
+        mavenOptions: |
+          -Dlicense.path=$(license.secureFilePath)
+          -Dupdatesite.path=$(updatesite_path)
+          -Ddocker.push.registry=$(docker_registry)
+          -Ddocker.push.username=$(docker_username)
+          -Ddocker.push.password=$(docker_password)
+          -Xmx3096m -Xmx1024m
+        options: '--settings $(settings_xml.secureFilePath) -X -Pdocker -am'
+        goals: 'deploy'
