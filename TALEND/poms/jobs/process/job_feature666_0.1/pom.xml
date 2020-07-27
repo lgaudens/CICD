@@ -41,12 +41,7 @@
     <project.distribution-management.repository.url>${project.distributionManagement.repository.url}</project.distribution-management.repository.url>
     <talend.job.type>Standard</talend.job.type>
   </properties>
-  <dependencies>
-    <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-    </dependency>
+  <dependencies>    
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
